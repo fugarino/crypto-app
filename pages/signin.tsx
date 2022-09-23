@@ -7,7 +7,7 @@ import { useAuth } from "../src/context/AuthContext";
 const SignIn: NextPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signin, loginWithGoogle }: any = useAuth();
+  const { signin, loginWithGoogle, forgotPassword }: any = useAuth();
 
   const router = useRouter();
 
@@ -26,6 +26,16 @@ const SignIn: NextPage = () => {
       setError("Unable to sign in");
     }
     setLoading(false);
+  };
+
+  const handleForgotPassword = async () => {
+    try {
+      setError("");
+      setLoading(true);
+      await forgotPassword(email.current.value);
+    } catch {
+      setError("Unable to send reset email");
+    }
   };
 
   const handleGoogleSignin = async () => {
@@ -51,6 +61,7 @@ const SignIn: NextPage = () => {
           Sign in
         </button>
       </form>
+      <button onClick={handleForgotPassword}>forgot password?</button>
       <button onClick={handleGoogleSignin}>Google</button>
       <p>{`don't have an account? `}</p>
       <Link href="/signup">
