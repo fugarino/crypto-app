@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { SyntheticEvent, useRef, useState } from "react";
-import { useAuth } from "../src/context/AuthContext";
+import { useAuth } from "../src/contexts/AuthContext";
 
 const SignIn: NextPage = () => {
   const [error, setError] = useState("");

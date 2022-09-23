@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useAuth } from "../src/context/AuthContext";
+import { useAuth } from "../src/contexts/AuthContext";
 
 const Home: NextPage = () => {
   const { currentUser, logout }: any = useAuth();

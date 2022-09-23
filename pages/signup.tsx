@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { sendEmailVerification } from "firebase/auth";
 import { SyntheticEvent, useRef, useState } from "react";
-import { auth } from "../src/config/firebase.config";
-import { useAuth } from "../src/context/AuthContext";
+import { auth } from "../src/configs/firebase.config";
+import { useAuth } from "../src/contexts/AuthContext";
 import { NextPage } from "next";
 
 const SignUp: NextPage = () => {

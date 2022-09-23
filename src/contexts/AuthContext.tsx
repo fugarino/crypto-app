@@ -8,7 +8,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { auth } from "../config/firebase.config";
+import { auth } from "../configs/firebase.config";
 
 interface IAuthProviderProps {
   children: ReactNode;
