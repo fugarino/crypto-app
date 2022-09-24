@@ -13,14 +13,14 @@ import { MenuButtonAlt } from "../buttons/MenuButtonAlt";
 
 export const Menu = () => {
   return (
-    <div className="h-screen border-r border-gray-200 w-14 pt-4">
+    <div className="h-14 border-t border-gray-200 w-[100vw-1px] sm:pt-4 sm:h-screen sm:border-t-0 sm:border-r sm:w-14">
       <Link href="/">
-        <a className="cursor-pointer flex flex-col">
+        <a className="hidden cursor-pointer sm:flex flex-col">
           <Image src="/L.svg" height={25} width={30} alt="logo" />
         </a>
       </Link>
-      <div className="flex flex-col justify-between items-center h-[calc(100%-41px)]">
-        <menu className="mt-20 space-y-12 flex flex-col items-center">
+      <div className="flex w-[100%] h-[100%] sm:flex-col justify-center sm:justify-between items-center sm:h-[calc(100%-41px)]">
+        <menu className="sm:mt-20 sm:space-y-12 sm:space-x-0 px-6 w-full flex justify-between sm:flex-col sm:items-center">
           <MenuButton href="/" label="Home">
             <HomeIcon className="menuIcon" />
           </MenuButton>
@@ -54,7 +54,7 @@ export const Menu = () => {
             <BellIcon className="menuIcon" />
           </MenuButton>
         </menu>
-        <ul className="mt-12 space-y-9">
+        <ul className="hidden sm:flex sm:flex-col sm:mt-12 sm:space-y-9">
           <MenuButton href="/help" label="Help">
             <QuestionMarkCircleIcon className="menuIcon" />
           </MenuButton>
