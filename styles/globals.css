@@ -1,3 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .active {
+    @apply bg-gray-200;
+  }
+
+  .menuIcon {
+    @apply h-5 w-5 text-gray-500;
+  }
+  .menuIconAlt {
+    @apply stroke-gray-500 fill-gray-500;
+  }
+  .menuIconAlt1 {
+    @apply stroke-gray-500;
+  }
+
+  a:hover .menuIcon {
+    @apply text-black;
+  }
+  a:hover .menuIconAlt {
+    @apply stroke-black fill-black;
+  }
+  a:hover .menuIconAlt1 {
+    @apply stroke-black;
+  }
+
+  .active .menuIcon {
+    @apply text-black;
+  }
+  .active .menuIconAlt {
+    @apply stroke-black fill-black;
+  }
+  .active .menuIconAlt1 {
+    @apply stroke-black;
+  }
+}
+
+body {
+  white-space: nowrap;
+}
