@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 
 interface IMenuButtonProps {
   href: string;
@@ -10,7 +10,17 @@ interface IMenuButtonProps {
 
 export const MenuButton = ({ href, label, children }: IMenuButtonProps) => {
   const [showLabel, setShowLabel] = useState(false);
+  const [isDesktop, setDesktop] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    window.innerWidth > 640 ? setDesktop(true) : setDesktop(false);
+    const updateMedia = () => {
+      window.innerWidth > 640 ? setDesktop(true) : setDesktop(false);
+    };
+    window.addEventListener("resize", updateMedia);
+    return () => window.removeEventListener("resize", updateMedia);
+  }, []);
 
   return (
     <li className="relative">
@@ -26,7 +36,7 @@ export const MenuButton = ({ href, label, children }: IMenuButtonProps) => {
           {children}
         </a>
       </Link>
-      {showLabel && (
+      {showLabel && isDesktop && (
         <div className="absolute left-12 bottom-1 px-4 py-1 bg-white text-gray-600 text-center rounded-md shadow-md">
           <div className="absolute top-3 -left-1 bg-white p-1 rotate-45 shadow-md"></div>
           {label}
