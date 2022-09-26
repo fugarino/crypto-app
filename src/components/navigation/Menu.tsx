@@ -4,14 +4,18 @@ import {
   ChatAlt2Icon,
   HomeIcon,
   LoginIcon,
+  LogoutIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "../../contexts/AuthContext";
 import { MenuButton } from "../buttons/MenuButton";
 import { MenuButtonAlt } from "../buttons/MenuButtonAlt";
 
 export const Menu = () => {
+  const { currentUser }: any = useAuth();
+
   return (
     <div className="h-14 border-t border-gray-200 w-[100vw-1px] sm:pt-4 sm:h-screen sm:border-t-0 sm:border-r sm:w-14">
       <Link href="/">
@@ -58,9 +62,15 @@ export const Menu = () => {
           <MenuButton href="/help" label="Help">
             <QuestionMarkCircleIcon className="menuIcon" />
           </MenuButton>
-          <MenuButtonAlt label="Sign in">
-            <LoginIcon className="menuIcon" />
-          </MenuButtonAlt>
+          {!currentUser ? (
+            <MenuButton href="/signin" label="Sign in">
+              <LoginIcon className="menuIcon" />
+            </MenuButton>
+          ) : (
+            <MenuButtonAlt label="Sign out">
+              <LogoutIcon className="menuIcon" />
+            </MenuButtonAlt>
+          )}
         </ul>
       </div>
     </div>

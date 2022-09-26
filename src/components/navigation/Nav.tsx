@@ -12,7 +12,7 @@ export const Nav = ({ children }: INavProps) => {
       <Menu />
       <div className="flex flex-col">
         <Header />
-        <main className="bg-[#f4f4f4] w-screen sm:w-[calc(100vw-56px)] h-[calc(100vh-112px)] sm:h-[calc(100vh-56px)] p-6">
+        <main className="bg-[#f4f4f4] w-screen sm:w-[calc(100vw-56px)] h-[calc(100vh-112px)] sm:h-[calc(100vh-56px)] p-6 sm:p-8">
           {children}
         </main>
       </div>
