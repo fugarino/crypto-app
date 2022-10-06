@@ -53,7 +53,7 @@ const SignUp: NextPage = () => {
   };
 
   return (
-    <LargeCardWithImage url="/rocketalt.svg" altLayout={true}>
+    <LargeCardWithImage url="/rocketB.svg" altLayout={false}>
       <FormLayout
         handleFormSubmit={handleSignup}
         error={error}
