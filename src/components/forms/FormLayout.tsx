@@ -13,7 +13,11 @@ const FormLayout = ({ handleFormSubmit, error, h1, p, children }: IFormLayoutPro
     <form onSubmit={handleFormSubmit}>
       <header>
         <h1 className="text-3xl font-semibold text-[#171b2f]">{h1}</h1>
-        {!error ? <p className="text-[#959AA1] mt-1 mb-5">{p}</p> : <p>{error}</p>}
+        {!error ? (
+          <p className="text-[#959AA1] mt-1 mb-5">{p}</p>
+        ) : (
+          <p className="mt-1 mb-5 text-red-500">{error}</p>
+        )}
       </header>
       {children}
     </form>
