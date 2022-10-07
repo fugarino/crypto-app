@@ -8,6 +8,7 @@ import FormLayout from "../src/components/forms/FormLayout";
 import LightInputField from "../src/components/forms/inputs/LightInputField";
 import SignInButton from "../src/components/buttons/SignInButton";
 import AuthProviderButton from "../src/components/buttons/AuthProviderButton";
+import { withPublic } from "../src/hooks/route";
 
 const SignIn: NextPage = () => {
   const [error, setError] = useState("");
@@ -116,4 +117,4 @@ const SignIn: NextPage = () => {
   );
 };
 
-export default SignIn;
+export default withPublic(SignIn);
