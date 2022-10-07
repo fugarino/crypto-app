@@ -13,3 +13,15 @@ export function withPublic(Component: React.FC) {
     return <Component {...props} />;
   };
 }
+
+export function withProtected(Component: React.FC) {
+  return function WithProtected(props: any) {
+    const auth: any = useAuth();
+    const router = useRouter();
+    if (!auth.currentUser) {
+      router.replace("/signin");
+      return <h1>Loading...</h1>;
+    }
+    return <Component {...props} />;
+  };
+}
