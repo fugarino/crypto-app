@@ -16,7 +16,7 @@ export const Header = () => {
           <Image src="/L.svg" height={25} width={30} alt="logo" />
         </a>
       </Link>
-      {currentUser ? (
+      {currentUser && currentUser.emailVerified ? (
         <div className="flex items-center space-x-4">
           <Link href="/notifications">
             <a>
@@ -33,8 +33,21 @@ export const Header = () => {
                 onMouseEnter={() => setProfileBorder(true)}
                 onMouseLeave={() => setProfileBorder(false)}
                 onClick={() => setProfileBorder(false)}
-                className="w-[32px] h-[32px] rounded-full bg-orange-300"
-              ></a>
+                className="w-[32px] h-[32px] rounded-full"
+              >
+                {currentUser.photoURL ? (
+                  <picture>
+                    <img
+                      src={currentUser.photoURL}
+                      alt="profile"
+                      referrerPolicy="no-referrer"
+                      className="w-[32px] h-[32px] rounded-full"
+                    />
+                  </picture>
+                ) : (
+                  <div className="w-[32px] h-[32px] rounded-full bg-gray-400"></div>
+                )}
+              </a>
             </Link>
           </div>
         </div>

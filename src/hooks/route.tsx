@@ -4,9 +4,9 @@ import { useAuth } from "../contexts/AuthContext";
 
 export function withPublic(Component: React.FC) {
   return function WithPublic(props: any) {
-    const auth: any = useAuth();
+    const { currentUser }: any = useAuth();
     const router = useRouter();
-    if (auth.currentUser) {
+    if (currentUser && currentUser.emailVerified) {
       router.replace("/");
       return <h1>Loading...</h1>;
     }
@@ -16,9 +16,9 @@ export function withPublic(Component: React.FC) {
 
 export function withProtected(Component: React.FC) {
   return function WithProtected(props: any) {
-    const auth: any = useAuth();
+    const { currentUser }: any = useAuth();
     const router = useRouter();
-    if (!auth.currentUser) {
+    if (!currentUser) {
       router.replace("/signin");
       return <h1>Loading...</h1>;
     }

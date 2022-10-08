@@ -4,12 +4,13 @@ import { useAuth } from "../src/contexts/AuthContext";
 
 const Home: NextPage = () => {
   const { currentUser, logout }: any = useAuth();
+  console.log(currentUser);
   return (
     <>
       <h1>Home Page</h1>
-      {currentUser ? (
+      {currentUser && currentUser.emailVerified ? (
         <>
-          <div>Hello {currentUser.uid}, you have succesfully signed in!</div>
+          <div>Hello {currentUser.displayName}, you have succesfully signed in!</div>
           <button onClick={logout}>Sign out</button>
         </>
       ) : (
