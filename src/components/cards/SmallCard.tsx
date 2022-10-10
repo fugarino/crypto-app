@@ -7,7 +7,7 @@ interface ISmallCard {
 
 const SmallCard = ({ children }: ISmallCard) => {
   return (
-    <section className="mx-auto overflow-hidden relative p-6 bg-white rounded-lg shadow-lg h-full max-h-[1000px] max-w-[600px]">
+    <section className="mx-auto overflow-hidden relative bg-white rounded-lg shadow-lg h-full max-h-[1000px] max-w-[600px]">
       {children}
     </section>
   );

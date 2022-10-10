@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { sendEmailVerification } from "firebase/auth";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
 import { SyntheticEvent, useRef, useState } from "react";
 import { auth } from "../src/configs/firebase.config";
 import { useAuth } from "../src/contexts/AuthContext";
@@ -18,6 +18,7 @@ const SignUp: NextPage = () => {
 
   const router = useRouter();
 
+  const userName = useRef<any>();
   const email = useRef<any>();
   const password = useRef<any>();
   const confirmPassword = useRef<any>();
@@ -31,6 +32,8 @@ const SignUp: NextPage = () => {
       setError("");
       setLoading(true);
       await signup(email.current.value, password.current.value);
+      // await updateprofile -> username change
+      await updateProfile(auth.currentUser, { displayName: userName.current.value });
       router.push(`/verify?email=${email.current.value}`);
       await sendEmailVerification(auth.currentUser, { url: "http://localhost:3000" });
     } catch {
@@ -60,6 +63,13 @@ const SignUp: NextPage = () => {
         h1="Create an account"
         p="Create an account, to access all features."
       >
+        <LightInputField
+          labelText="Name"
+          type="text"
+          id="userName"
+          currentRef={userName}
+          placeholder="username"
+        ></LightInputField>
         <LightInputField
           labelText="Email"
           type="email"
