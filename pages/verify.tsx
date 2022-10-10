@@ -7,8 +7,8 @@ const Verify = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-1/2">
-      <Image src="/emailVerify.svg" height={125} width={125} alt="logo" />
-      <h1 className="font-bold text-2xl">Verify Email</h1>
+      <Image src="/notification_illustration_3.svg" height={125} width={125} alt="logo" />
+      <h1 className="font-bold text-2xl mt-2">Verify Email</h1>
       <p className="mt-3">{`You're almost there! We sent an email to`}</p>
       <p className="font-semibold">{email}</p>
       <p className="mt-3">Just click the link in that email to complete your signup.</p>

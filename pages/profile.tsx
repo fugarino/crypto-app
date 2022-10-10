@@ -15,14 +15,7 @@ const Profile = () => {
 
   return (
     <SmallCard>
-      <picture>
-        <img
-          src="/Untitled (4).svg"
-          alt="flying rocket"
-          className="absolute left-1 h-[22rem] object-cover"
-        />
-      </picture>
-      <div className="flex items-center justify-center my-10 relative">
+      <div className="flex items-center justify-center my-10 relative bg-slate-200">
         <div className="relative w-[316px] h-[316px] rounded-full border-[3px] flex items-center justify-center bg-white">
           <picture>
             <img
