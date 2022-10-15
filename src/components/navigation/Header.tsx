@@ -1,15 +1,13 @@
 import { BellIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import Profile from "../dropdowns/profile-dropdown/Profile";
 
 export const Header = () => {
-  const [profileBorder, setProfileBorder] = useState(false);
   const { currentUser }: any = useAuth();
-
   return (
-    <header className="w-[100vw-1px] sm:w-[calc(100vw-56px)] border-b border-gray-200 h-14 flex items-center justify-between p-3 pr-4">
+    <header className="relative w-[100vw-1px] sm:w-[calc(100vw-56px)] border-b border-gray-200 h-14 flex items-center justify-between p-3 pr-4">
       <div className="hidden sm:flex"></div>
       <Link href="/">
         <a className="flex cursor-pointer sm:hidden">
@@ -17,39 +15,13 @@ export const Header = () => {
         </a>
       </Link>
       {currentUser && currentUser.emailVerified ? (
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center">
           <Link href="/notifications">
-            <a>
+            <a className="mr-4">
               <BellIcon className="menuIcon text-gray-500" />
             </a>
           </Link>
-          <div
-            className={`w-9 h-9 rounded-full border-[1px] border-gray-300 flex items-center justify-center ${
-              profileBorder ? "hover:border-gray-400" : ""
-            } transition-all duration-200 ease-out`}
-          >
-            <Link href="/profile">
-              <a
-                onMouseEnter={() => setProfileBorder(true)}
-                onMouseLeave={() => setProfileBorder(false)}
-                onClick={() => setProfileBorder(false)}
-                className="w-[32px] h-[32px] rounded-full"
-              >
-                {currentUser.photoURL ? (
-                  <picture>
-                    <img
-                      src={currentUser.photoURL}
-                      alt="profile"
-                      referrerPolicy="no-referrer"
-                      className="w-[32px] h-[32px] rounded-full"
-                    />
-                  </picture>
-                ) : (
-                  <div className="w-[32px] h-[32px] rounded-full bg-gray-400"></div>
-                )}
-              </a>
-            </Link>
-          </div>
+          <Profile />
         </div>
       ) : (
         <Link href="/signin">

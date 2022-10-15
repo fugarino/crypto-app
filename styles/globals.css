@@ -41,3 +41,17 @@
 body {
   white-space: nowrap;
 }
+
+.profileShadow {
+  box-shadow: 0px 2px 10px 3px rgb(227, 227, 227);
+}
+.profileShadow::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  position: absolute;
+  top: -2px;
+  right: 18px;
+  transform: rotate(45deg);
+}
