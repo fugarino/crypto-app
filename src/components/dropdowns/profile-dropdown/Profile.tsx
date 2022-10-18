@@ -3,59 +3,49 @@ import { useAuth } from "../../../contexts/AuthContext";
 import ProfileDropdown from "./ProfileDropdown";
 
 const Profile = () => {
-  const [profileBorder, setProfileBorder] = useState(false);
-  const [profileDropdown, setProfileDropdown] = useState(false);
+  const [darkProfileBorder, setDarkProfileBorder] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const { currentUser }: any = useAuth();
 
   const onProfileMouseEnter = () => {
-    setProfileBorder(true);
-    setProfileDropdown(true);
+    setDarkProfileBorder(true);
   };
 
   const onProfileMouseLeave = () => {
     if (!showProfile) {
-      setProfileBorder(false);
-      setProfileDropdown(false);
-      setShowProfile(false);
+      setDarkProfileBorder(false);
     }
   };
 
   const onProfileClick = () => {
-    if (showProfile || profileDropdown) {
-      setProfileBorder(false);
-      setProfileDropdown(false);
-      setShowProfile(false);
-    }
+    setShowProfile(!showProfile);
+    !showProfile ? setDarkProfileBorder(true) : setDarkProfileBorder(false);
   };
 
   return (
-    <div id="dropdown" onMouseEnter={onProfileMouseEnter} onMouseLeave={onProfileMouseLeave}>
+    <div className="w-9 h-9 flex items-center justify-center">
       <button
-        className={`w-9 h-9 rounded-full border-[1px] border-gray-300 flex items-center justify-center ${
-          profileBorder ? "border-gray-400" : ""
-        } transition-all duration-200 ease-out`}
+        className={`w-full h-full rounded-full border-[1px] flex items-center justify-center active:w-[32px] active:h-[32px] transition-all duration-200 ease-out ${
+          darkProfileBorder ? "border-gray-400" : "border-gray-300"
+        }`}
+        onMouseEnter={onProfileMouseEnter}
+        onMouseLeave={onProfileMouseLeave}
+        onClick={onProfileClick}
       >
-        {currentUser.photoURL ? (
-          <picture>
-            <img
-              src={currentUser.photoURL}
-              alt="profile"
-              referrerPolicy="no-referrer"
-              className="relative w-[32px] h-[32px] rounded-full"
-              onClick={onProfileClick}
-            />
-          </picture>
-        ) : (
-          <div className="w-[32px] h-[32px] rounded-full bg-gray-400"></div>
-        )}
+        <picture className="flex items-center justify-center">
+          <img
+            src={currentUser.photoURL ? currentUser.photoURL : "/Untitled (5).svg"}
+            alt="profile"
+            referrerPolicy="no-referrer"
+            id="profile"
+            className="w-[32px] h-[32px] rounded-full"
+          />
+        </picture>
       </button>
-      {profileDropdown && (
+      {showProfile && (
         <ProfileDropdown
-          showProfile={showProfile}
           setShowProfile={setShowProfile}
-          setProfileDropdown={setProfileDropdown}
-          setProfileBorder={setProfileBorder}
+          setDarkProfileBorder={setDarkProfileBorder}
         />
       )}
     </div>
