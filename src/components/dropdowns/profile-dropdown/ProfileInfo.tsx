@@ -1,8 +1,7 @@
-import { PencilIcon, CheckIcon, XIcon } from "@heroicons/react/outline";
+import { PencilIcon } from "@heroicons/react/outline";
 import { updateProfile } from "firebase/auth";
 import { SyntheticEvent, useRef, useState } from "react";
 import { useAuth } from "../../../contexts/AuthContext";
-import { auth } from "../../../configs/firebase.config";
 import { storage } from "../../../configs/firebase.config";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import LightInputField from "../../forms/inputs/LightInputField";
@@ -10,10 +9,11 @@ import LightInputField from "../../forms/inputs/LightInputField";
 const ProfileInfo = () => {
   const { currentUser, logout }: any = useAuth();
   const [editProfile, setEditProfile] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<any>();
   const [loading, setLoading] = useState(false);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [error, setError] = useState("");
+
+  const updatedDisplayName = useRef<any>();
 
   const upload = async (file: any, currentUser: any) => {
     const fileRef = ref(storage, currentUser.uid);
@@ -21,10 +21,7 @@ const ProfileInfo = () => {
     const snapshot = await uploadBytes(fileRef, file);
     const photoURL: any = await getDownloadURL(fileRef);
     updateProfile(currentUser, { photoURL: photoURL });
-    window.location.reload();
   };
-
-  const updatedDisplayName = useRef<any>();
 
   const handleFileChange = (e: any) => {
     if (e.target.files[0]) {
@@ -34,8 +31,16 @@ const ProfileInfo = () => {
 
   const handleProfileSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    if (profilePhoto) {
-      upload(profilePhoto, currentUser);
+    if (profilePhoto || updatedDisplayName.current.value !== currentUser.displayName) {
+      if (profilePhoto) {
+        await upload(profilePhoto, currentUser);
+      }
+      if (updatedDisplayName.current.value !== currentUser.displayName) {
+        await updateProfile(currentUser, { displayName: updatedDisplayName.current.value });
+      }
+      window.location.reload();
+    } else {
+      setEditProfile(false);
     }
   };
 
@@ -56,20 +61,13 @@ const ProfileInfo = () => {
       <div className="relative mt-14 px-4">
         {editProfile ? (
           <>
-            <button
-              onClick={() => setEditProfile(false)}
-              id="profile"
-              className="flex items-center justify-center border-[1.5px] rounded-[5px] absolute right-[67px] -top-[47px] w-[45px] h-[24px] border-slate-400 hover:border-slate-500"
-            >
-              <XIcon className="menuIcon text-slate-600 pointer-events-none" />
-            </button>
             <form onSubmit={handleProfileSubmit}>
               <button
                 type="submit"
                 id="profile"
-                className="flex justify-center border-2 border-slate-500 bg-slate-500 text-white rounded-[5px] absolute right-4 -top-[47px] w-[45px]"
+                className="flex justify-center border-2 border-slate-400 text-slate-500 rounded-[5px] hover:border-slate-500 hover:text-slate-600 absolute right-4 py-1 px-6 -top-[47px]"
               >
-                <CheckIcon className="menuIcon text-white pointer-events-none" />
+                <span>Save</span>
               </button>
               {error && <h1>{error}</h1>}
               <LightInputField
@@ -79,8 +77,29 @@ const ProfileInfo = () => {
                 currentRef={updatedDisplayName}
                 defaultValue={currentUser.displayName}
               />
-              <input type="file" name="profileImage" accept="image/*" onChange={handleFileChange} />
+              <div className="relative -top-2 flex flex-col transition-all duration-150 ease-out mb-2">
+                <label htmlFor="profileImage" className="font-medium">
+                  Profile picture
+                </label>
+                <input
+                  type="file"
+                  name="profileImage"
+                  accept="image/*"
+                  className="py-1"
+                  onChange={handleFileChange}
+                />
+              </div>
+              <hr className="pt-2" />
             </form>
+            <button
+              onClick={() => setEditProfile(false)}
+              id="profile"
+              className="flex items-center justify-center rounded-[5px] h-[24px] mx-auto mt-2 mb-1"
+            >
+              <span id="profile" className="text-slate-600 hover:text-black">
+                Discard changes
+              </span>
+            </button>
           </>
         ) : (
           <>

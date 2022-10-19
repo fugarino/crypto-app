@@ -25,7 +25,7 @@ export const Header = () => {
         </div>
       ) : (
         <Link href="/signin">
-          <a className="bg-[#E87483] text-white px-4 py-1 rounded-sm cursor-pointer hover:bg-[#da6877] transition-all duration-150 ease-out">
+          <a className="bg-slate-500 text-white px-4 py-1 rounded-[5px] cursor-pointer hover:bg-slate-600">
             Sign in
           </a>
         </Link>
