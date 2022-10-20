@@ -2,7 +2,7 @@ import { BellIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "../../contexts/AuthContext";
-import Profile from "../dropdowns/profile-dropdown/Profile";
+import ProfileButton from "../buttons/ProfileButton";
 
 export const Header = () => {
   const { currentUser }: any = useAuth();
@@ -21,7 +21,7 @@ export const Header = () => {
               <BellIcon className="menuIcon text-gray-500" />
             </a>
           </Link>
-          <Profile />
+          <ProfileButton />
         </div>
       ) : (
         <Link href="/signin">

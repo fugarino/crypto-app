@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useAuth } from "../../../contexts/AuthContext";
-import ProfileDropdown from "./ProfileDropdown";
+import { useAuth } from "../../contexts/AuthContext";
+import ProfileDropdown from "../dropdowns/ProfileDropdown";
 
-const Profile = () => {
+const ProfileButton = () => {
   const [darkProfileBorder, setDarkProfileBorder] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const { currentUser }: any = useAuth();
@@ -52,4 +52,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileButton;

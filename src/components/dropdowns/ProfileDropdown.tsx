@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import ProfileInfo from "./ProfileInfo";
+import ProfileCard from "../cards/ProfileCard";
 
 interface IProfileDropDown {
   setShowProfile: (arg0: boolean) => void;
@@ -28,7 +28,7 @@ const ProfileDropDown = ({ setShowProfile, setDarkProfileBorder }: IProfileDropD
       ref={ref}
       className={`absolute top-[61px] right-[10px] w-80 bg-white shadow-md overflow-hidden rounded-md`}
     >
-      <ProfileInfo />
+      <ProfileCard />
     </div>
   );
 };

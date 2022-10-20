@@ -5,7 +5,7 @@ import { auth } from "../src/configs/firebase.config";
 import { useAuth } from "../src/contexts/AuthContext";
 import { NextPage } from "next";
 import Link from "next/link";
-import LargeCardWithImage from "../src/components/cards/LargeCardWithImage";
+import LargeCardWithImage from "../src/components/cards/card-layouts/LargeCardWithImage";
 import FormLayout from "../src/components/forms/FormLayout";
 import LightInputField from "../src/components/forms/inputs/LightInputField";
 import SignInButton from "../src/components/buttons/SignInButton";
